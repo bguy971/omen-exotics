@@ -1,5 +1,6 @@
+import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProduct, formatPrice } from '@/lib/products';
+import { getProduct, getProductPriceRange } from '@/lib/products';
 
 export default function ProductPage({
   params
@@ -9,6 +10,8 @@ export default function ProductPage({
   const product = getProduct(params.slug);
 
   if (!product) return notFound();
+
+  const hasMultipleVariants = product.variants.length > 1;
 
   return (
     <section className="section">
@@ -59,7 +62,7 @@ export default function ProductPage({
               marginBottom: 20
             }}
           >
-            {formatPrice(product.price)}
+            {getProductPriceRange(product)}
           </p>
 
           <p
@@ -72,11 +75,91 @@ export default function ProductPage({
             {product.description}
           </p>
 
+          <div
+            className="card"
+            style={{
+              marginTop: 28
+            }}
+          >
+            {hasMultipleVariants ? (
+              <>
+                <label
+                  className="eyebrow"
+                  htmlFor="variant"
+                  style={{
+                    display: 'block',
+                    marginBottom: 12
+                  }}
+                >
+                  Select Option
+                </label>
+
+                <select
+                  id="variant"
+                  className="input"
+                  defaultValue={product.variants[0]?.id}
+                >
+                  {product.variants.map((variant) => (
+                    <option value={variant.id} key={variant.id}>
+                      {variant.label}
+                    </option>
+                  ))}
+                </select>
+              </>
+            ) : (
+              <div>
+                <div className="eyebrow">Product Option</div>
+                <p style={{ marginBottom: 0 }}>{product.variants[0]?.label}</p>
+              </div>
+            )}
+
+            {product.options?.map((option) => (
+              <div style={{ marginTop: 22 }} key={option.name}>
+                <label
+                  className="eyebrow"
+                  htmlFor={option.name}
+                  style={{
+                    display: 'block',
+                    marginBottom: 12
+                  }}
+                >
+                  {option.name}
+                </label>
+
+                <select id={option.name} className="input">
+                  {option.values.map((value) => (
+                    <option value={value} key={value}>
+                      {value}
+                    </option>
+                  ))}
+                </select>
+              </div>
+            ))}
+
+            {product.includes && (
+              <div style={{ marginTop: 26 }}>
+                <div className="eyebrow">Includes</div>
+
+                <div
+                  style={{
+                    display: 'grid',
+                    gap: 12,
+                    marginTop: 14
+                  }}
+                >
+                  {product.includes.map((item) => (
+                    <div key={item}>✓ {item}</div>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+
           {product.isLive && (
             <div
               className="card"
               style={{
-                marginTop: 28
+                marginTop: 24
               }}
             >
               <strong
@@ -126,9 +209,9 @@ export default function ProductPage({
               Add to Cart
             </button>
 
-            <button className="btn secondary" type="button">
+            <Link className="btn secondary" href="/shipping">
               View Shipping Policy
-            </button>
+            </Link>
           </div>
 
           <div
