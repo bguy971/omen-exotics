@@ -1,0 +1,1 @@
+export default function Login(){return <section className="section"><div className="container"><h1>Login</h1><form className="form"><input className="input" placeholder="Email"/><input className="input" placeholder="Password" type="password"/><button className="btn" type="button">Login</button></form></div></section>}

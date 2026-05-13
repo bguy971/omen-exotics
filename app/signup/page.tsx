@@ -1,0 +1,1 @@
+export default function Signup(){return <section className="section"><div className="container"><h1>Create Account</h1><form className="form"><input className="input" placeholder="Email"/><input className="input" placeholder="Password" type="password"/><button className="btn" type="button">Create Account</button></form></div></section>}

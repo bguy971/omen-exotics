@@ -1,0 +1,3 @@
+export default function Account(){
+  return <section className="section"><div className="container"><div className="eyebrow">Account</div><h1 style={{fontFamily:'Georgia,serif',fontSize:'4rem'}}>Customer Account</h1><div className="grid" style={{gridTemplateColumns:'repeat(auto-fit,minmax(240px,1fr))'}}><div className="card"><h3>Orders</h3><p className="muted">Order history will appear here after Stripe webhook sync.</p></div><div className="card"><h3>Addresses</h3><p className="muted">Saved shipping addresses powered by Supabase.</p></div><div className="card"><h3>Subscriptions</h3><p className="muted">Manage active feeder subscriptions through Stripe Customer Portal.</p></div></div></div></section>
+}
