@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { products, formatPrice } from '@/lib/products';
+import { products, getProductPriceRange } from '@/lib/products';
 
 export default function Home() {
   const featured = products.slice(0, 4);
@@ -56,7 +56,7 @@ export default function Home() {
               marginTop: 28
             }}
           >
-            <Link className="card" href="/shop">
+            <Link className="card" href="/shop#live-feeders">
               <h3>Live Feeders</h3>
               <p className="muted">
                 Professionally packed feeder insects for reptile, amphibian,
@@ -64,15 +64,15 @@ export default function Home() {
               </p>
             </Link>
 
-            <Link className="card" href="/shop">
-              <h3>Springtails</h3>
+            <Link className="card" href="/shop#bioactive-cultures">
+              <h3>Bioactive Cultures</h3>
               <p className="muted">
                 Bioactive cleanup crew cultures built for expansion, enclosure
                 support, and serious keeper setups.
               </p>
             </Link>
 
-            <Link className="card" href="/shop">
+            <Link className="card" href="/shop#supplies">
               <h3>Supplies</h3>
               <p className="muted">
                 Culture food, maintenance essentials, and operational products
@@ -80,7 +80,7 @@ export default function Home() {
               </p>
             </Link>
 
-            <Link className="card" href="/shop">
+            <Link className="card" href="/shop#starter-kits">
               <h3>Starter Kits</h3>
               <p className="muted">
                 Curated entry-point kits designed to make getting started simple
@@ -165,7 +165,7 @@ export default function Home() {
 
                 <p className="muted">{product.description}</p>
 
-                <p className="price">{formatPrice(product.price)}</p>
+                <p className="price">{getProductPriceRange(product)}</p>
               </Link>
             ))}
           </div>
