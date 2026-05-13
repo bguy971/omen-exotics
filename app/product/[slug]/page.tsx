@@ -67,11 +67,19 @@ export default async function ProductPage({
           <div className="card" style={{ marginTop: 28 }}>
             {hasMultipleVariants ? (
               <>
-                <label className="eyebrow" htmlFor="variant" style={{ display: 'block', marginBottom: 12 }}>
+                <label
+                  className="eyebrow"
+                  htmlFor="variant"
+                  style={{ display: 'block', marginBottom: 12 }}
+                >
                   Select Option
                 </label>
 
-                <select id="variant" className="input" defaultValue={product.variants[0]?.id}>
+                <select
+                  id="variant"
+                  className="input"
+                  defaultValue={product.variants[0]?.id}
+                >
                   {product.variants.map((variant) => (
                     <option value={variant.id} key={variant.id}>
                       {variant.label}
@@ -88,7 +96,11 @@ export default async function ProductPage({
 
             {product.options?.map((option) => (
               <div style={{ marginTop: 22 }} key={option.name}>
-                <label className="eyebrow" htmlFor={option.name} style={{ display: 'block', marginBottom: 12 }}>
+                <label
+                  className="eyebrow"
+                  htmlFor={option.name}
+                  style={{ display: 'block', marginBottom: 12 }}
+                >
                   {option.name}
                 </label>
 
@@ -101,6 +113,25 @@ export default async function ProductPage({
                 </select>
               </div>
             ))}
+
+            <div style={{ marginTop: 22 }}>
+              <label
+                className="eyebrow"
+                htmlFor="quantity"
+                style={{ display: 'block', marginBottom: 12 }}
+              >
+                Quantity
+              </label>
+
+              <select id="quantity" className="input" defaultValue="1">
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+              </select>
+            </div>
 
             {product.includes && (
               <div style={{ marginTop: 26 }}>
@@ -122,14 +153,23 @@ export default async function ProductPage({
               </strong>
 
               <p className="muted">
-                Live products ship Monday through Wednesday to reduce transit risk and avoid weekend delays.
+                Live products ship Monday through Wednesday to reduce transit
+                risk and avoid weekend delays.
               </p>
 
               <p className="muted">
-                Orders may be delayed during unsafe weather conditions to protect live arrival success.
+                Orders may be delayed during unsafe weather conditions to protect
+                live arrival success.
               </p>
 
-              <label style={{ display: 'flex', gap: 12, marginTop: 20, alignItems: 'flex-start' }}>
+              <label
+                style={{
+                  display: 'flex',
+                  gap: 12,
+                  marginTop: 20,
+                  alignItems: 'flex-start'
+                }}
+              >
                 <input type="checkbox" />
                 <span className="muted">
                   I understand OMEN EXOTICS live shipping and arrival policies.
@@ -138,7 +178,14 @@ export default async function ProductPage({
             </div>
           )}
 
-          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 30 }}>
+          <div
+            style={{
+              display: 'flex',
+              gap: 14,
+              flexWrap: 'wrap',
+              marginTop: 30
+            }}
+          >
             <button className="btn" type="button">
               Add to Cart
             </button>

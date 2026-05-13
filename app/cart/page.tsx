@@ -26,18 +26,18 @@ export default function Cart() {
           <div className="card">
             <div className="cart-row">
               <div>
-                <strong>100 Count Mealworms</strong>
-                <p className="muted">Live Feeders</p>
+                <strong>Live Mealworms</strong>
+                <p className="muted">500 Count • Medium (0.50”) • Qty: 1</p>
               </div>
-              <div>$4.99</div>
+              <div>Pricing coming soon</div>
             </div>
 
             <div className="cart-row">
               <div>
-                <strong>Temperate White Springtail Culture</strong>
-                <p className="muted">Springtails</p>
+                <strong>Temperate White Springtails</strong>
+                <p className="muted">Starter Culture (8 oz) • Qty: 2</p>
               </div>
-              <div>$14.99</div>
+              <div>Pricing coming soon</div>
             </div>
           </div>
 
@@ -53,7 +53,7 @@ export default function Cart() {
 
             <div className="cart-row">
               <span>Subtotal</span>
-              <span>$19.98</span>
+              <span>Pricing coming soon</span>
             </div>
 
             <div className="cart-row">
