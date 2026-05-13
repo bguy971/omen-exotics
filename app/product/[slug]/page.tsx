@@ -2,12 +2,13 @@ import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import { getProduct, getProductPriceRange } from '@/lib/products';
 
-export default function ProductPage({
+export default async function ProductPage({
   params
 }: {
-  params: { slug: string };
+  params: Promise<{ slug: string }>;
 }) {
-  const product = getProduct(params.slug);
+  const { slug } = await params;
+  const product = getProduct(slug);
 
   if (!product) return notFound();
 
@@ -55,50 +56,22 @@ export default function ProductPage({
             {product.title}
           </h1>
 
-          <p
-            className="price"
-            style={{
-              fontSize: '2rem',
-              marginBottom: 20
-            }}
-          >
+          <p className="price" style={{ fontSize: '2rem', marginBottom: 20 }}>
             {getProductPriceRange(product)}
           </p>
 
-          <p
-            className="muted"
-            style={{
-              fontSize: '1.05rem',
-              maxWidth: 640
-            }}
-          >
+          <p className="muted" style={{ fontSize: '1.05rem', maxWidth: 640 }}>
             {product.description}
           </p>
 
-          <div
-            className="card"
-            style={{
-              marginTop: 28
-            }}
-          >
+          <div className="card" style={{ marginTop: 28 }}>
             {hasMultipleVariants ? (
               <>
-                <label
-                  className="eyebrow"
-                  htmlFor="variant"
-                  style={{
-                    display: 'block',
-                    marginBottom: 12
-                  }}
-                >
+                <label className="eyebrow" htmlFor="variant" style={{ display: 'block', marginBottom: 12 }}>
                   Select Option
                 </label>
 
-                <select
-                  id="variant"
-                  className="input"
-                  defaultValue={product.variants[0]?.id}
-                >
+                <select id="variant" className="input" defaultValue={product.variants[0]?.id}>
                   {product.variants.map((variant) => (
                     <option value={variant.id} key={variant.id}>
                       {variant.label}
@@ -115,14 +88,7 @@ export default function ProductPage({
 
             {product.options?.map((option) => (
               <div style={{ marginTop: 22 }} key={option.name}>
-                <label
-                  className="eyebrow"
-                  htmlFor={option.name}
-                  style={{
-                    display: 'block',
-                    marginBottom: 12
-                  }}
-                >
+                <label className="eyebrow" htmlFor={option.name} style={{ display: 'block', marginBottom: 12 }}>
                   {option.name}
                 </label>
 
@@ -140,13 +106,7 @@ export default function ProductPage({
               <div style={{ marginTop: 26 }}>
                 <div className="eyebrow">Includes</div>
 
-                <div
-                  style={{
-                    display: 'grid',
-                    gap: 12,
-                    marginTop: 14
-                  }}
-                >
+                <div style={{ display: 'grid', gap: 12, marginTop: 14 }}>
                   {product.includes.map((item) => (
                     <div key={item}>✓ {item}</div>
                   ))}
@@ -156,39 +116,20 @@ export default function ProductPage({
           </div>
 
           {product.isLive && (
-            <div
-              className="card"
-              style={{
-                marginTop: 24
-              }}
-            >
-              <strong
-                style={{
-                  display: 'block',
-                  marginBottom: 12
-                }}
-              >
+            <div className="card" style={{ marginTop: 24 }}>
+              <strong style={{ display: 'block', marginBottom: 12 }}>
                 Live Product Notice
               </strong>
 
               <p className="muted">
-                Live products ship Monday through Wednesday to reduce transit
-                risk and avoid weekend delays.
+                Live products ship Monday through Wednesday to reduce transit risk and avoid weekend delays.
               </p>
 
               <p className="muted">
-                Orders may be delayed during unsafe weather conditions to protect
-                live arrival success.
+                Orders may be delayed during unsafe weather conditions to protect live arrival success.
               </p>
 
-              <label
-                style={{
-                  display: 'flex',
-                  gap: 12,
-                  marginTop: 20,
-                  alignItems: 'flex-start'
-                }}
-              >
+              <label style={{ display: 'flex', gap: 12, marginTop: 20, alignItems: 'flex-start' }}>
                 <input type="checkbox" />
                 <span className="muted">
                   I understand OMEN EXOTICS live shipping and arrival policies.
@@ -197,14 +138,7 @@ export default function ProductPage({
             </div>
           )}
 
-          <div
-            style={{
-              display: 'flex',
-              gap: 14,
-              flexWrap: 'wrap',
-              marginTop: 30
-            }}
-          >
+          <div style={{ display: 'flex', gap: 14, flexWrap: 'wrap', marginTop: 30 }}>
             <button className="btn" type="button">
               Add to Cart
             </button>
@@ -212,42 +146,6 @@ export default function ProductPage({
             <Link className="btn secondary" href="/shipping">
               View Shipping Policy
             </Link>
-          </div>
-
-          <div
-            className="card"
-            style={{
-              marginTop: 40
-            }}
-          >
-            <h2
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: '2rem',
-                marginTop: 0
-              }}
-            >
-              The OMEN Standard
-            </h2>
-
-            <p className="muted">
-              Every live product is handled with keeper-first standards,
-              structured production controls, and professional fulfillment
-              practices.
-            </p>
-
-            <div
-              style={{
-                display: 'grid',
-                gap: 12,
-                marginTop: 22
-              }}
-            >
-              <div>✓ Quality checked before fulfillment</div>
-              <div>✓ Controlled colony maintenance</div>
-              <div>✓ Shipping risk protocols</div>
-              <div>✓ Premium direct-to-customer presentation</div>
-            </div>
           </div>
         </div>
       </div>
