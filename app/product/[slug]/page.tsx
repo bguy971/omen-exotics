@@ -8,6 +8,8 @@ import {
 } from '@/lib/catalog';
 import { ProductPurchaseBox } from '@/components/ProductPurchaseBox';
 
+export const dynamic = 'force-dynamic';
+
 export default async function ProductPage({
   params
 }: {

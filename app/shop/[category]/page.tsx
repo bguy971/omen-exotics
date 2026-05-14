@@ -6,6 +6,8 @@ import {
   getProductsByCategory
 } from '@/lib/catalog';
 
+export const dynamic = 'force-dynamic';
+
 export function generateStaticParams() {
   return Object.keys(categoryData).map((category) => ({
     category

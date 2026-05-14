@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { getFeaturedProducts, getProductPriceRange } from '@/lib/catalog';
 
+export const dynamic = 'force-dynamic';
+
 export default async function Home() {
   const featured = await getFeaturedProducts();
 
