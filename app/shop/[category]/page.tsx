@@ -1,45 +1,10 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
 import {
-  categories,
+  categoryData,
   getProductPriceRange,
-  getProductsByCategory,
-  type ProductCategory
-} from '@/lib/products';
-
-const categoryData: Record<
-  string,
-  {
-    title: ProductCategory;
-    heading: string;
-    description: string;
-  }
-> = {
-  'live-feeders': {
-    title: 'Live Feeders',
-    heading: 'Live Feeders',
-    description:
-      'Live feeder products packed around clean supply, keeper convenience, and professional fulfillment standards.'
-  },
-  'bioactive-cultures': {
-    title: 'Bioactive Cultures',
-    heading: 'Bioactive Cultures',
-    description:
-      'Springtails and future cleanup crew cultures for bioactive enclosures, colony expansion, and keeper systems.'
-  },
-  supplies: {
-    title: 'Supplies',
-    heading: 'Supplies',
-    description:
-      'Support products for feeder care, culture maintenance, and bioactive enclosure setup.'
-  },
-  'starter-kits': {
-    title: 'Starter Kits',
-    heading: 'Starter Kits',
-    description:
-      'Curated starter systems that bundle live products, supplies, and care guidance into cleaner entry points.'
-  }
-};
+  getProductsByCategory
+} from '@/lib/catalog';
 
 export function generateStaticParams() {
   return Object.keys(categoryData).map((category) => ({
@@ -55,11 +20,11 @@ export default async function CategoryPage({
   const { category } = await params;
   const data = categoryData[category];
 
-  if (!data || !categories.includes(data.title)) {
+  if (!data) {
     return notFound();
   }
 
-  const products = getProductsByCategory(data.title);
+  const products = await getProductsByCategory(data.title);
 
   return (
     <section className="section">

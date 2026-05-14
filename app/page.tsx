@@ -1,8 +1,8 @@
 import Link from 'next/link';
-import { products, getProductPriceRange } from '@/lib/products';
+import { getFeaturedProducts, getProductPriceRange } from '@/lib/catalog';
 
-export default function Home() {
-  const featured = products.slice(0, 4);
+export default async function Home() {
+  const featured = await getFeaturedProducts();
 
   return (
     <>
@@ -56,7 +56,7 @@ export default function Home() {
               marginTop: 28
             }}
           >
-            <Link className="card" href="/shop#live-feeders">
+            <Link className="card" href="/shop/live-feeders">
               <h3>Live Feeders</h3>
               <p className="muted">
                 Professionally packed feeder insects for reptile, amphibian,
@@ -64,7 +64,7 @@ export default function Home() {
               </p>
             </Link>
 
-            <Link className="card" href="/shop#bioactive-cultures">
+            <Link className="card" href="/shop/bioactive-cultures">
               <h3>Bioactive Cultures</h3>
               <p className="muted">
                 Bioactive cleanup crew cultures built for expansion, enclosure
@@ -72,7 +72,7 @@ export default function Home() {
               </p>
             </Link>
 
-            <Link className="card" href="/shop#supplies">
+            <Link className="card" href="/shop/supplies">
               <h3>Supplies</h3>
               <p className="muted">
                 Culture food, maintenance essentials, and operational products
@@ -80,7 +80,7 @@ export default function Home() {
               </p>
             </Link>
 
-            <Link className="card" href="/shop#starter-kits">
+            <Link className="card" href="/shop/starter-kits">
               <h3>Starter Kits</h3>
               <p className="muted">
                 Curated entry-point kits designed to make getting started simple

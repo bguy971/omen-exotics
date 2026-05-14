@@ -1,6 +1,11 @@
 import Link from 'next/link';
 import { notFound } from 'next/navigation';
-import { getProduct, getProductPriceRange } from '@/lib/products';
+import {
+  getProductBySlug,
+  getProductPriceRange,
+  productIncludes,
+  productOptions
+} from '@/lib/catalog';
 
 export default async function ProductPage({
   params
@@ -8,11 +13,13 @@ export default async function ProductPage({
   params: Promise<{ slug: string }>;
 }) {
   const { slug } = await params;
-  const product = getProduct(slug);
+  const product = await getProductBySlug(slug);
 
   if (!product) return notFound();
 
-  const hasMultipleVariants = product.variants.length > 1;
+  const hasMultipleVariants = product.product_variants.length > 1;
+  const options = productOptions[product.slug] || [];
+  const includes = productIncludes[product.slug] || [];
 
   return (
     <section className="section">
@@ -41,7 +48,7 @@ export default async function ProductPage({
 
         <div>
           <div className="eyebrow">
-            {product.category} • {product.stockStatus}
+            {product.category} • {product.stock_status || product.status}
           </div>
 
           <h1
@@ -78,11 +85,11 @@ export default async function ProductPage({
                 <select
                   id="variant"
                   className="input"
-                  defaultValue={product.variants[0]?.id}
+                  defaultValue={product.product_variants[0]?.id}
                 >
-                  {product.variants.map((variant) => (
+                  {product.product_variants.map((variant) => (
                     <option value={variant.id} key={variant.id}>
-                      {variant.label}
+                      {variant.title}
                     </option>
                   ))}
                 </select>
@@ -90,11 +97,13 @@ export default async function ProductPage({
             ) : (
               <div>
                 <div className="eyebrow">Product Option</div>
-                <p style={{ marginBottom: 0 }}>{product.variants[0]?.label}</p>
+                <p style={{ marginBottom: 0 }}>
+                  {product.product_variants[0]?.title}
+                </p>
               </div>
             )}
 
-            {product.options?.map((option) => (
+            {options.map((option) => (
               <div style={{ marginTop: 22 }} key={option.name}>
                 <label
                   className="eyebrow"
@@ -133,12 +142,12 @@ export default async function ProductPage({
               </select>
             </div>
 
-            {product.includes && (
+            {includes.length > 0 && (
               <div style={{ marginTop: 26 }}>
                 <div className="eyebrow">Includes</div>
 
                 <div style={{ display: 'grid', gap: 12, marginTop: 14 }}>
-                  {product.includes.map((item) => (
+                  {includes.map((item) => (
                     <div key={item}>✓ {item}</div>
                   ))}
                 </div>
@@ -146,7 +155,7 @@ export default async function ProductPage({
             )}
           </div>
 
-          {product.isLive && (
+          {product.is_live_product && (
             <div className="card" style={{ marginTop: 24 }}>
               <strong style={{ display: 'block', marginBottom: 12 }}>
                 Live Product Notice
