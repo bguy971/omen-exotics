@@ -48,7 +48,7 @@ export default async function ProductPage({
 
         <div>
           <div className="eyebrow">
-            {product.category} • {product.stock_status || product.status}
+            {product.category} • {product.status}
           </div>
 
           <h1
