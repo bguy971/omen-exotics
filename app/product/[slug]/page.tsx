@@ -6,6 +6,7 @@ import {
   productIncludes,
   productOptions
 } from '@/lib/catalog';
+import { ProductPurchaseBox } from '@/components/ProductPurchaseBox';
 
 export default async function ProductPage({
   params
@@ -17,7 +18,6 @@ export default async function ProductPage({
 
   if (!product) return notFound();
 
-  const hasMultipleVariants = product.product_variants.length > 1;
   const options = productOptions[product.slug] || [];
   const includes = productIncludes[product.slug] || [];
 
@@ -71,89 +71,7 @@ export default async function ProductPage({
             {product.description}
           </p>
 
-          <div className="card" style={{ marginTop: 28 }}>
-            {hasMultipleVariants ? (
-              <>
-                <label
-                  className="eyebrow"
-                  htmlFor="variant"
-                  style={{ display: 'block', marginBottom: 12 }}
-                >
-                  Select Option
-                </label>
-
-                <select
-                  id="variant"
-                  className="input"
-                  defaultValue={product.product_variants[0]?.id}
-                >
-                  {product.product_variants.map((variant) => (
-                    <option value={variant.id} key={variant.id}>
-                      {variant.title}
-                    </option>
-                  ))}
-                </select>
-              </>
-            ) : (
-              <div>
-                <div className="eyebrow">Product Option</div>
-                <p style={{ marginBottom: 0 }}>
-                  {product.product_variants[0]?.title}
-                </p>
-              </div>
-            )}
-
-            {options.map((option) => (
-              <div style={{ marginTop: 22 }} key={option.name}>
-                <label
-                  className="eyebrow"
-                  htmlFor={option.name}
-                  style={{ display: 'block', marginBottom: 12 }}
-                >
-                  {option.name}
-                </label>
-
-                <select id={option.name} className="input">
-                  {option.values.map((value) => (
-                    <option value={value} key={value}>
-                      {value}
-                    </option>
-                  ))}
-                </select>
-              </div>
-            ))}
-
-            <div style={{ marginTop: 22 }}>
-              <label
-                className="eyebrow"
-                htmlFor="quantity"
-                style={{ display: 'block', marginBottom: 12 }}
-              >
-                Quantity
-              </label>
-
-              <select id="quantity" className="input" defaultValue="1">
-                <option value="1">1</option>
-                <option value="2">2</option>
-                <option value="3">3</option>
-                <option value="4">4</option>
-                <option value="5">5</option>
-                <option value="10">10</option>
-              </select>
-            </div>
-
-            {includes.length > 0 && (
-              <div style={{ marginTop: 26 }}>
-                <div className="eyebrow">Includes</div>
-
-                <div style={{ display: 'grid', gap: 12, marginTop: 14 }}>
-                  {includes.map((item) => (
-                    <div key={item}>✓ {item}</div>
-                  ))}
-                </div>
-              </div>
-            )}
-          </div>
+          <ProductPurchaseBox product={product} options={options} includes={includes} />
 
           {product.is_live_product && (
             <div className="card" style={{ marginTop: 24 }}>
@@ -187,19 +105,31 @@ export default async function ProductPage({
             </div>
           )}
 
-          <div
-            style={{
-              display: 'flex',
-              gap: 14,
-              flexWrap: 'wrap',
-              marginTop: 30
-            }}
-          >
-            <button className="btn" type="button">
-              Add to Cart
-            </button>
+          <div className="card" style={{ marginTop: 40 }}>
+            <h2
+              style={{
+                fontFamily: 'Georgia, serif',
+                fontSize: '2rem',
+                marginTop: 0
+              }}
+            >
+              The OMEN Standard
+            </h2>
 
-            <Link className="btn secondary" href="/shipping">
+            <p className="muted">
+              Every live product is handled with keeper-first standards,
+              structured production controls, and professional fulfillment
+              practices.
+            </p>
+
+            <div style={{ display: 'grid', gap: 12, marginTop: 22 }}>
+              <div>✓ Quality checked before fulfillment</div>
+              <div>✓ Controlled colony maintenance</div>
+              <div>✓ Shipping risk protocols</div>
+              <div>✓ Premium direct-to-customer presentation</div>
+            </div>
+
+            <Link className="btn secondary" href="/shipping" style={{ marginTop: 24 }}>
               View Shipping Policy
             </Link>
           </div>
