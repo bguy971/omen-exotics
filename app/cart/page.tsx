@@ -14,6 +14,8 @@ type CartItem = {
   isLive: boolean;
 };
 
+const quantityOptions = Array.from({ length: 10 }, (_, index) => index + 1);
+
 function formatPrice(cents: number) {
   if (!cents) return 'Pricing coming soon';
   return `$${(cents / 100).toFixed(2)}`;
@@ -83,14 +85,7 @@ export default function Cart() {
             </Link>
           </div>
         ) : (
-          <div
-            className="grid"
-            style={{
-              gridTemplateColumns: 'minmax(0, 2fr) minmax(280px, 1fr)',
-              gap: 32,
-              marginTop: 42
-            }}
-          >
+          <div className="cart-layout">
             <div className="card">
               {cart.map((item) => (
                 <div className="cart-row" key={item.variantId}>
@@ -101,33 +96,24 @@ export default function Cart() {
                       {item.variantTitle} • {formatPrice(item.price)}
                     </p>
 
-                    <div
-                      style={{
-                        display: 'flex',
-                        gap: 12,
-                        alignItems: 'center',
-                        marginTop: 12
-                      }}
-                    >
+                    <div className="cart-controls">
                       <label className="eyebrow" htmlFor={`qty-${item.variantId}`}>
                         Qty
                       </label>
 
                       <select
                         id={`qty-${item.variantId}`}
-                        className="input"
+                        className="input small-input"
                         value={item.quantity}
                         onChange={(event) =>
                           updateQuantity(item.variantId, Number(event.target.value))
                         }
-                        style={{ maxWidth: 120 }}
                       >
-                        <option value="1">1</option>
-                        <option value="2">2</option>
-                        <option value="3">3</option>
-                        <option value="4">4</option>
-                        <option value="5">5</option>
-                        <option value="10">10</option>
+                        {quantityOptions.map((value) => (
+                          <option value={value} key={value}>
+                            {value}
+                          </option>
+                        ))}
                       </select>
 
                       <button
@@ -161,14 +147,7 @@ export default function Cart() {
               </div>
 
               {hasLiveProducts && (
-                <label
-                  style={{
-                    display: 'flex',
-                    gap: 12,
-                    marginTop: 20,
-                    alignItems: 'flex-start'
-                  }}
-                >
+                <label className="policy-check">
                   <input
                     type="checkbox"
                     checked={policyAccepted}
@@ -195,7 +174,7 @@ export default function Cart() {
               </button>
 
               <p className="muted" style={{ fontSize: '.9rem', marginTop: 16 }}>
-                Checkout wiring comes next. Cart storage is now active.
+                Checkout wiring comes later. Cart storage is active.
               </p>
             </div>
           </div>

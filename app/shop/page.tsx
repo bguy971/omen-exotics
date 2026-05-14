@@ -42,61 +42,31 @@ export default async function Shop() {
           style={{
             maxWidth: 760,
             marginTop: 18,
-            marginBottom: 48
+            marginBottom: 42
           }}
         >
-          OMEN is organized by category so the shop stays clean as the product
-          catalog grows.
+          OMEN is organized by category so the shop stays clean as the catalog
+          grows.
         </p>
 
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))'
-          }}
-        >
+        <div className="category-list">
           {categoryCounts.map(({ category, count }) => {
             const slug = categorySlugs[category];
             const item = categoryData[slug];
 
             return (
-              <Link className="card" href={`/shop/${slug}`} key={category}>
-                <div
-                  style={{
-                    height: 230,
-                    border: '1px solid rgba(245,241,232,.06)',
-                    background:
-                      'radial-gradient(circle at top right, rgba(140,107,47,.14), transparent 11rem), #111111',
-                    display: 'grid',
-                    placeItems: 'center',
-                    marginBottom: 24
-                  }}
-                >
-                  <span className="muted" style={{ fontSize: '.8rem' }}>
-                    Category Image
-                  </span>
+              <Link className="category-tile" href={`/shop/${slug}`} key={category}>
+                <div>
+                  <p className="eyebrow">
+                    {count} Product{count === 1 ? '' : 's'}
+                  </p>
+
+                  <h3>{item.title}</h3>
+
+                  <p className="muted">{item.description}</p>
                 </div>
 
-                <p className="eyebrow">
-                  {count} Product{count === 1 ? '' : 's'}
-                </p>
-
-                <h3>{item.title}</h3>
-
-                <p className="muted">{item.description}</p>
-
-                <span
-                  style={{
-                    display: 'inline-block',
-                    marginTop: 22,
-                    color: '#b8944f',
-                    fontSize: '.75rem',
-                    letterSpacing: '.12em',
-                    textTransform: 'uppercase'
-                  }}
-                >
-                  Explore Category
-                </span>
+                <span className="category-arrow">→</span>
               </Link>
             );
           })}

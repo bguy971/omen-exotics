@@ -23,6 +23,8 @@ type CartItem = {
   isLive: boolean;
 };
 
+const quantityOptions = Array.from({ length: 10 }, (_, index) => index + 1);
+
 export function ProductPurchaseBox({ product, options, includes }: Props) {
   const [variantId, setVariantId] = useState(product.product_variants[0]?.id || '');
   const [quantity, setQuantity] = useState(1);
@@ -39,7 +41,8 @@ export function ProductPurchaseBox({ product, options, includes }: Props) {
     const cart: CartItem[] = existingCart ? JSON.parse(existingCart) : [];
 
     const existingItem = cart.find(
-      (item) => item.productId === product.id && item.variantId === selectedVariant.id
+      (item) =>
+        item.productId === product.id && item.variantId === selectedVariant.id
     );
 
     if (existingItem) {
@@ -59,16 +62,15 @@ export function ProductPurchaseBox({ product, options, includes }: Props) {
 
     window.localStorage.setItem('omen-cart', JSON.stringify(cart));
     setAdded(true);
-
     setTimeout(() => setAdded(false), 1800);
   }
 
   return (
     <>
-      <div className="card" style={{ marginTop: 28 }}>
+      <div className="card purchase-card" style={{ marginTop: 28 }}>
         {product.product_variants.length > 1 ? (
           <>
-            <label className="eyebrow" htmlFor="variant" style={{ display: 'block', marginBottom: 12 }}>
+            <label className="eyebrow" htmlFor="variant">
               Select Option
             </label>
 
@@ -93,8 +95,8 @@ export function ProductPurchaseBox({ product, options, includes }: Props) {
         )}
 
         {options.map((option) => (
-          <div style={{ marginTop: 22 }} key={option.name}>
-            <label className="eyebrow" htmlFor={option.name} style={{ display: 'block', marginBottom: 12 }}>
+          <div className="field-group" key={option.name}>
+            <label className="eyebrow" htmlFor={option.name}>
               {option.name}
             </label>
 
@@ -108,8 +110,8 @@ export function ProductPurchaseBox({ product, options, includes }: Props) {
           </div>
         ))}
 
-        <div style={{ marginTop: 22 }}>
-          <label className="eyebrow" htmlFor="quantity" style={{ display: 'block', marginBottom: 12 }}>
+        <div className="field-group">
+          <label className="eyebrow" htmlFor="quantity">
             Quantity
           </label>
 
@@ -119,12 +121,11 @@ export function ProductPurchaseBox({ product, options, includes }: Props) {
             value={quantity}
             onChange={(event) => setQuantity(Number(event.target.value))}
           >
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="10">10</option>
+            {quantityOptions.map((value) => (
+              <option value={value} key={value}>
+                {value}
+              </option>
+            ))}
           </select>
         </div>
 
