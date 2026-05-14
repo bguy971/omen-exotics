@@ -95,7 +95,7 @@ export default async function CategoryPage({
                   </span>
                 </div>
 
-                <p className="eyebrow">{product.stockStatus}</p>
+                <p className="eyebrow">{product.status}</p>
 
                 <h3>{product.title}</h3>
 
