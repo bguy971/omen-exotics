@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import Link from 'next/link';
 
 export function Header() {
@@ -13,12 +14,15 @@ export function Header() {
 
       <div className="nav">
         <div className="container nav-inner">
-          <Link href="/" className="brand">
-            <span className="brand-mark">O</span>
-            <span className="brand-text">
-              <span>OMEN</span>
-              <small>EXOTICS</small>
-            </span>
+          <Link href="/" className="logo-link">
+            <Image
+              src="/logo.png"
+              alt="OMEN EXOTICS"
+              width={260}
+              height={90}
+              priority
+              className="header-logo"
+            />
           </Link>
 
           <nav className="nav-links">

@@ -587,3 +587,48 @@ select {
     flex-direction: column;
   }
 }
+
+/*================adding logo to header/footer ===========*/
+
+
+.logo-link {
+  display: inline-flex;
+  align-items: center;
+}
+
+.header-logo {
+  width: 190px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-grid {
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 36px;
+}
+
+.footer-logo {
+  width: 220px;
+  height: auto;
+  display: block;
+  object-fit: contain;
+}
+
+.footer-bottom {
+  margin-top: 44px;
+  padding-top: 22px;
+  border-top: 1px solid rgba(245, 241, 232, 0.08);
+  color: #8f8777;
+  font-size: 0.82rem;
+}
+
+@media (max-width: 900px) {
+  .header-logo {
+    width: 150px;
+  }
+
+  .footer-logo {
+    width: 190px;
+  }
+}
