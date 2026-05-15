@@ -3,219 +3,182 @@ import { getFeaturedProducts, getProductPriceRange } from '@/lib/catalog';
 
 export const dynamic = 'force-dynamic';
 
+const categoryCards = [
+  {
+    title: 'Live Feeders',
+    href: '/shop/live-feeders',
+    kicker: 'Mealworms',
+    className: 'cat-feeders'
+  },
+  {
+    title: 'Springtail Cultures',
+    href: '/shop/bioactive-cultures',
+    kicker: 'Temperate Whites',
+    className: 'cat-springtails'
+  },
+  {
+    title: 'Isopods',
+    href: '/shop/isopods',
+    kicker: 'Coming Soon',
+    className: 'cat-isopods'
+  },
+  {
+    title: 'Supplies',
+    href: '/shop/supplies',
+    kicker: 'Food • Litter • Charcoal',
+    className: 'cat-supplies'
+  }
+];
+
 export default async function Home() {
   const featured = await getFeaturedProducts();
 
   return (
     <>
-      <section className="hero">
-        <div className="container">
-          <div className="eyebrow">Premium Supply for Serious Keepers</div>
+      <section className="hero storefront-hero">
+        <div className="container hero-layout">
+          <div className="hero-copy">
+            <div className="eyebrow">Premium Quality. Built for serious keepers.</div>
 
-          <h1>
-            Premium Feeders.
-            <br />
-            Cultures.
-            <br />
-            Exotic Supply.
-          </h1>
-
-          <p>
-            Controlled live feeder production, professionally maintained cultures,
-            and premium exotic supply built for serious keepers who expect
-            reliability, presentation, and clean operational standards.
-          </p>
-
-          <div className="hero-actions">
-            <Link className="btn" href="/shop">
-              Shop Feeders
-            </Link>
-
-            <Link className="btn secondary" href="/about">
-              Explore OMEN
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section className="trust">
-        <div className="container trust-grid">
-          <div className="trust-item">Professionally Maintained Colonies</div>
-          <div className="trust-item">Live Arrival Support</div>
-          <div className="trust-item">Secure Checkout</div>
-          <div className="trust-item">Ships Mon–Wed</div>
-        </div>
-      </section>
-
-      <section className="section">
-        <div className="container">
-          <div className="eyebrow">Shop by Category</div>
-
-          <div
-            className="grid"
-            style={{
-              gridTemplateColumns: 'repeat(auto-fit,minmax(240px,1fr))',
-              marginTop: 28
-            }}
-          >
-            <Link className="card" href="/shop/live-feeders">
-              <h3>Live Feeders</h3>
-              <p className="muted">
-                Professionally packed feeder insects for reptile, amphibian,
-                bird, and exotic keeper systems.
-              </p>
-            </Link>
-
-            <Link className="card" href="/shop/bioactive-cultures">
-              <h3>Bioactive Cultures</h3>
-              <p className="muted">
-                Bioactive cleanup crew cultures built for expansion, enclosure
-                support, and serious keeper setups.
-              </p>
-            </Link>
-
-            <Link className="card" href="/shop/supplies">
-              <h3>Supplies</h3>
-              <p className="muted">
-                Culture food, maintenance essentials, and operational products
-                built around clean bioactive support.
-              </p>
-            </Link>
-
-            <Link className="card" href="/shop/starter-kits">
-              <h3>Starter Kits</h3>
-              <p className="muted">
-                Curated entry-point kits designed to make getting started simple
-                without sacrificing quality.
-              </p>
-            </Link>
-          </div>
-        </div>
-      </section>
-
-      <section
-        className="section"
-        style={{
-          background:
-            'linear-gradient(135deg, rgba(140,107,47,.08), transparent 40%), #141414'
-        }}
-      >
-        <div
-          className="container grid"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fit,minmax(320px,1fr))',
-            alignItems: 'center',
-            gap: 48
-          }}
-        >
-          <div>
-            <div className="eyebrow">The OMEN Standard</div>
-
-            <h2
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: 'clamp(2.6rem,6vw,5rem)',
-                lineHeight: '.95',
-                marginTop: 14
-              }}
-            >
-              Controlled supply.
+            <h1>
+              Premium Feeders,
               <br />
-              Clean systems.
+              Bioactive Cultures
               <br />
-              Serious standards.
-            </h2>
-          </div>
+              & Exotic Supply
+            </h1>
 
-          <div className="card">
-            <p className="muted">
-              OMEN EXOTICS is built around production discipline—not random
-              inventory flipping.
+            <p>
+              Healthy live feeders, professionally maintained cultures, and
+              keeper-focused supplies packed with clean presentation and serious
+              standards.
             </p>
 
-            <div
-              style={{
-                display: 'grid',
-                gap: 16,
-                marginTop: 26
-              }}
-            >
-              <div>✓ Weekly colony production rhythm</div>
-              <div>✓ Redundant culture maintenance</div>
-              <div>✓ Pre-shipment quality checks</div>
-              <div>✓ Live-order shipping controls</div>
-              <div>✓ Keeper-focused support standards</div>
+            <div className="hero-actions">
+              <Link className="btn" href="/shop/live-feeders">
+                Shop Feeders
+              </Link>
+
+              <Link className="btn secondary" href="/shop/bioactive-cultures">
+                Shop Bioactive
+              </Link>
             </div>
+          </div>
+
+          <div className="hero-visual" aria-hidden="true">
+            <div className="hero-orb" />
+            <div className="hero-specimen specimen-gecko" />
+            <div className="hero-specimen specimen-mealworms" />
           </div>
         </div>
       </section>
 
-      <section className="section">
+      <section className="quick-shop-section">
         <div className="container">
-          <div className="eyebrow">Featured Products</div>
+          <div className="section-heading-row">
+            <div>
+              <div className="eyebrow">Shop by Category</div>
+              <h2>Find what you need fast.</h2>
+            </div>
 
-          <div className="grid product-grid" style={{ marginTop: 28 }}>
-            {featured.map((product) => (
+            <Link className="text-link" href="/shop">
+              View All →
+            </Link>
+          </div>
+
+          <div className="category-card-grid">
+            {categoryCards.map((card) => (
               <Link
-                className="card"
-                href={`/product/${product.slug}`}
-                key={product.id}
+                className={`category-image-card ${card.className}`}
+                href={card.href}
+                key={card.title}
               >
-                <p className="eyebrow">{product.category}</p>
-
-                <h3>{product.title}</h3>
-
-                <p className="muted">{product.description}</p>
-
-                <p className="price">{getProductPriceRange(product)}</p>
+                <span>{card.kicker}</span>
+                <strong>{card.title}</strong>
+                <em>Shop Now →</em>
               </Link>
             ))}
           </div>
         </div>
       </section>
 
-      <section
-        className="section"
-        style={{
-          background:
-            'radial-gradient(circle at top right, rgba(140,107,47,.18), transparent 28rem), #111111'
-        }}
-      >
+      <section className="featured-strip section">
         <div className="container">
-          <div className="eyebrow">Get First Access</div>
+          <div className="section-heading-row">
+            <div>
+              <div className="eyebrow">Featured Products</div>
+              <h2>Top picks for your collection.</h2>
+            </div>
 
-          <h2
-            style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: 'clamp(2.5rem,6vw,4.8rem)',
-              lineHeight: '.95',
-              marginTop: 14
-            }}
-          >
-            Restocks.
-            <br />
-            Species drops.
-            <br />
-            New releases.
-          </h2>
+            <Link className="text-link" href="/shop">
+              View All Products →
+            </Link>
+          </div>
 
-          <p
-            className="muted"
-            style={{
-              maxWidth: 640,
-              marginTop: 18
-            }}
-          >
-            Build your relationship with OMEN early. Get product drops, future
-            species availability, and premium release notifications.
-          </p>
+          <div className="grid product-grid premium-product-grid">
+            {featured.map((product) => (
+              <Link
+                className="product-card"
+                href={`/product/${product.slug}`}
+                key={product.id}
+              >
+                <div className="product-image">
+                  <span>{product.category}</span>
+                </div>
 
-          <form className="form" style={{ marginTop: 28 }}>
-            <input className="input" placeholder="Email address" />
-            <button className="btn" type="button">
-              Join the List
-            </button>
-          </form>
+                <div className="product-card-body">
+                  <p className="eyebrow">{product.status}</p>
+                  <h3>{product.title}</h3>
+                  <p className="muted">{product.description}</p>
+
+                  <div className="product-card-footer">
+                    <p className="price">{getProductPriceRange(product)}</p>
+                    <span>Add / View →</span>
+                  </div>
+                </div>
+              </Link>
+            ))}
+          </div>
+        </div>
+      </section>
+
+      <section className="trust premium-trust">
+        <div className="container trust-grid">
+          <div className="trust-item">
+            <strong>Healthy Cultures</strong>
+            <span>Grown and maintained with care.</span>
+          </div>
+          <div className="trust-item">
+            <strong>Fast Shipping</strong>
+            <span>Carefully packed live orders.</span>
+          </div>
+          <div className="trust-item">
+            <strong>Secure Packaging</strong>
+            <span>Built around live arrival success.</span>
+          </div>
+          <div className="trust-item">
+            <strong>Keeper Quality</strong>
+            <span>Products built for serious setups.</span>
+          </div>
+        </div>
+      </section>
+
+      <section className="starter-kit-panel section">
+        <div className="container starter-kit-card">
+          <div>
+            <div className="eyebrow">Perfect for new setups</div>
+            <h2>Bioactive starter kits.</h2>
+            <p>
+              Everything needed to begin building a clean, active bioactive
+              environment with curated cultures and support supplies.
+            </p>
+
+            <Link className="btn" href="/shop/starter-kits">
+              Shop Kits →
+            </Link>
+          </div>
+
+          <div className="kit-visual" aria-hidden="true" />
         </div>
       </section>
     </>
