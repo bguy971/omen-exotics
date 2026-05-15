@@ -4,9 +4,26 @@ import { Header } from '@/components/Header';
 import { Footer } from '@/components/Footer';
 
 export const metadata: Metadata = {
-  title: 'OMEN EXOTICS | Coming Soon',
+  title: 'OMEN EXOTICS | Premium Feeders, Bioactive Cultures & Exotic Supply',
   description:
-    'OMEN EXOTICS is building a premium exotic supply platform for serious keepers.'
+    'OMEN EXOTICS supplies premium live feeders, bioactive cultures, keeper supplies, and future exotic releases for serious keepers.',
+  openGraph: {
+    title: 'OMEN EXOTICS',
+    description:
+      'Premium live feeders, bioactive cultures, keeper supplies, and exotic supply.',
+    images: ['/og-image.jpg']
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'OMEN EXOTICS',
+    description:
+      'Premium live feeders, bioactive cultures, keeper supplies, and exotic supply.',
+    images: ['/og-image.jpg']
+  },
+  icons: {
+    icon: '/favicon.ico',
+    apple: '/branding/apple-touch-icon.png'
+  }
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

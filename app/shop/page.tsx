@@ -8,6 +8,10 @@ import {
 
 export const dynamic = 'force-dynamic';
 
+function categoryImagePath(slug: string) {
+  return `/categories/category-${slug}.jpg`;
+}
+
 export default async function Shop() {
   const categoryCounts = await Promise.all(
     categories.map(async (category) => {
@@ -41,6 +45,7 @@ export default async function Shop() {
               <Link
                 className={`shop-category-card shop-card-${slug}`}
                 href={`/shop/${slug}`}
+                style={{ backgroundImage: `url(${categoryImagePath(slug)})` }}
                 key={category}
               >
                 <div>

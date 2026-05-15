@@ -5,31 +5,36 @@ export function Header() {
     <header className="site-header">
       <div className="top-strip">
         <div className="container top-strip-inner">
-          <span>Premium Exotic Supply</span>
-          <span>Live Feeders • Cultures • Supplies</span>
-          <span>Ships Mon–Wed</span>
+          <span>Premium live feeders</span>
+          <span>Bioactive cultures</span>
+          <span>Keeper-grade supplies</span>
         </div>
       </div>
 
-      <nav className="nav">
+      <div className="nav">
         <div className="container nav-inner">
           <Link className="logo-link" href="/">
-            <img className="header-logo" src="/logo.png" alt="OMEN EXOTICS" />
+            <img
+              className="header-logo"
+              src="/branding/omen-logo-horizontal.png"
+              alt="OMEN EXOTICS"
+            />
           </Link>
 
-          <div className="nav-links">
+          <nav className="nav-links">
             <Link href="/shop">Shop</Link>
-            <Link href="/shop/live-feeders">Feeders</Link>
-            <Link href="/shop/bioactive-cultures">Cultures</Link>
-            <Link href="/shop/supplies">Supplies</Link>
+            <Link href="/shipping">Shipping</Link>
+            <Link href="/live-arrival-policy">Live Arrival</Link>
             <Link href="/wholesale">Wholesale</Link>
-          </div>
+            <Link href="/about">About</Link>
+            <Link href="/contact">Contact</Link>
+          </nav>
 
           <Link className="cart-link" href="/cart">
             Cart
           </Link>
         </div>
-      </nav>
+      </div>
     </header>
   );
 }

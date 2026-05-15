@@ -21,6 +21,10 @@ function formatPrice(cents: number) {
   return `$${(cents / 100).toFixed(2)}`;
 }
 
+function productImagePath(slug: string) {
+  return `/products/${slug}/main.jpg`;
+}
+
 export default function Cart() {
   const [cart, setCart] = useState<CartItem[]>([]);
   const [policyAccepted, setPolicyAccepted] = useState(false);
@@ -59,9 +63,7 @@ export default function Cart() {
       <div className="container">
         <div className="eyebrow">OMEN Checkout</div>
 
-        <h1 className="page-title">
-          Your cart.
-        </h1>
+        <h1 className="page-title">Your cart.</h1>
 
         <p className="page-intro">
           Review your live feeders, cultures, supplies, and starter kits before
@@ -90,7 +92,10 @@ export default function Cart() {
             <div className="cart-items-panel">
               {cart.map((item) => (
                 <div className="premium-cart-row" key={item.variantId}>
-                  <div className="cart-product-thumb" />
+                  <div
+                    className="cart-product-thumb"
+                    style={{ backgroundImage: `url(${productImagePath(item.productSlug)})` }}
+                  />
 
                   <div className="cart-product-main">
                     <Link href={`/product/${item.productSlug}`}>

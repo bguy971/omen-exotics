@@ -8,6 +8,10 @@ import {
 } from '@/lib/catalog';
 import { ProductPurchaseBox } from '@/components/ProductPurchaseBox';
 
+function productImagePath(slug: string, fileName = 'main.jpg') {
+  return `/products/${slug}/${fileName}`;
+}
+
 export const dynamic = 'force-dynamic';
 
 export default async function ProductPage({
@@ -27,14 +31,20 @@ export default async function ProductPage({
     <section className="section product-page">
       <div className="container product-detail-grid">
         <div className="product-gallery">
-          <div className="product-main-image">
+          <div
+            className="product-main-image"
+            style={{ backgroundImage: `url(${productImagePath(product.slug)})` }}
+          >
             <span>{product.category}</span>
           </div>
 
           <div className="product-thumb-row">
-            <div />
-            <div />
-            <div />
+            {['thumb-1.jpg', 'thumb-2.jpg', 'thumb-3.jpg'].map((fileName) => (
+              <div
+                key={fileName}
+                style={{ backgroundImage: `url(${productImagePath(product.slug, fileName)})` }}
+              />
+            ))}
           </div>
         </div>
 

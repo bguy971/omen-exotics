@@ -6,6 +6,14 @@ import {
   getProductsByCategory
 } from '@/lib/catalog';
 
+function categoryImagePath(category: string) {
+  return `/categories/category-${category}.jpg`;
+}
+
+function productImagePath(slug: string) {
+  return `/products/${slug}/main.jpg`;
+}
+
 export const dynamic = 'force-dynamic';
 
 export function generateStaticParams() {
@@ -31,7 +39,10 @@ export default async function CategoryPage({
           ← Back to Shop
         </Link>
 
-        <div className="category-hero-panel">
+        <div
+          className="category-hero-panel"
+          style={{ backgroundImage: `url(${categoryImagePath(category)})` }}
+        >
           <div>
             <div className="eyebrow">{data.title}</div>
 
@@ -56,7 +67,10 @@ export default async function CategoryPage({
                 href={`/product/${product.slug}`}
                 key={product.id}
               >
-                <div className="product-image">
+                <div
+                  className="product-image"
+                  style={{ backgroundImage: `url(${productImagePath(product.slug)})` }}
+                >
                   <span>{product.category}</span>
                 </div>
 

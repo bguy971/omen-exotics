@@ -1,6 +1,10 @@
 import Link from 'next/link';
 import { getFeaturedProducts, getProductPriceRange } from '@/lib/catalog';
 
+function productImagePath(slug: string) {
+  return `/products/${slug}/main.jpg`;
+}
+
 export const dynamic = 'force-dynamic';
 
 const categoryCards = [
@@ -8,25 +12,29 @@ const categoryCards = [
     title: 'Live Feeders',
     href: '/shop/live-feeders',
     kicker: 'Mealworms',
-    className: 'cat-feeders'
+    className: 'cat-feeders',
+    image: '/categories/category-live-feeders.jpg'
   },
   {
     title: 'Springtail Cultures',
     href: '/shop/bioactive-cultures',
     kicker: 'Temperate Whites',
-    className: 'cat-springtails'
+    className: 'cat-springtails',
+    image: '/categories/category-springtails.jpg'
   },
   {
     title: 'Isopods',
     href: '/shop/isopods',
     kicker: 'Coming Soon',
-    className: 'cat-isopods'
+    className: 'cat-isopods',
+    image: '/categories/category-isopods.jpg'
   },
   {
     title: 'Supplies',
     href: '/shop/supplies',
     kicker: 'Food • Litter • Charcoal',
-    className: 'cat-supplies'
+    className: 'cat-supplies',
+    image: '/categories/category-supplies.jpg'
   }
 ];
 
@@ -67,8 +75,16 @@ export default async function Home() {
 
           <div className="hero-visual" aria-hidden="true">
             <div className="hero-orb" />
-            <div className="hero-specimen specimen-gecko" />
-            <div className="hero-specimen specimen-mealworms" />
+            <img
+              className="hero-specimen specimen-gecko"
+              src="/hero/hero-gecko.jpg"
+              alt="Premium exotic reptile from OMEN EXOTICS"
+            />
+            <img
+              className="hero-specimen specimen-mealworms"
+              src="/hero/hero-mealworms.jpg"
+              alt="Premium live mealworms from OMEN EXOTICS"
+            />
           </div>
         </div>
       </section>
@@ -91,6 +107,7 @@ export default async function Home() {
               <Link
                 className={`category-image-card ${card.className}`}
                 href={card.href}
+                style={{ backgroundImage: `url(${card.image})` }}
                 key={card.title}
               >
                 <span>{card.kicker}</span>
@@ -122,7 +139,10 @@ export default async function Home() {
                 href={`/product/${product.slug}`}
                 key={product.id}
               >
-                <div className="product-image">
+                <div
+                  className="product-image"
+                  style={{ backgroundImage: `url(${productImagePath(product.slug)})` }}
+                >
                   <span>{product.category}</span>
                 </div>
 
@@ -178,7 +198,11 @@ export default async function Home() {
             </Link>
           </div>
 
-          <div className="kit-visual" aria-hidden="true" />
+          <img
+            className="kit-visual"
+            src="/hero/starter-kit.jpg"
+            alt="OMEN EXOTICS bioactive starter kit"
+          />
         </div>
       </section>
     </>

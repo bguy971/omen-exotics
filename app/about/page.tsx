@@ -17,7 +17,11 @@ export default function Page() {
         </p>
 
         <div className="brand-split">
-          <div className="brand-image-panel" />
+          <img
+            className="brand-image-panel"
+            src="/about/about-hero.jpg"
+            alt="OMEN EXOTICS controlled feeder and bioactive production"
+          />
 
           <div className="brand-copy-panel">
             <div className="eyebrow">The Standard</div>
