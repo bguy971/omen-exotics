@@ -1,45 +1,29 @@
-import { supabase } from './supabase';
-
-export type ProductCategory =
-  | 'Live Feeders'
-  | 'Bioactive Cultures'
-  | 'Supplies'
-  | 'Starter Kits';
-
-export type CatalogVariant = {
+export type ProductVariant = {
   id: string;
   title: string;
-  sku: string | null;
   price: number;
-  inventory_quantity: number;
-  stock_status: string;
-  stripe_price_id: string | null;
-  is_subscription_eligible: boolean;
 };
 
-export type CatalogProduct = {
+export type Product = {
   id: string;
-  title: string;
   slug: string;
-  subtitle: string | null;
-  description: string | null;
-  category: ProductCategory;
+  title: string;
+  category: string;
+  description: string;
   status: string;
   is_live_product: boolean;
-  requires_policy_acknowledgment: boolean;
-  shipping_profile: string;
   featured: boolean;
-  product_variants: CatalogVariant[];
+  variants: ProductVariant[];
 };
 
-export const categories: ProductCategory[] = [
+export const categories = [
   'Live Feeders',
   'Bioactive Cultures',
   'Supplies',
   'Starter Kits'
 ];
 
-export const categorySlugs: Record<ProductCategory, string> = {
+export const categorySlugs: Record<string, string> = {
   'Live Feeders': 'live-feeders',
   'Bioactive Cultures': 'bioactive-cultures',
   Supplies: 'supplies',
@@ -49,175 +33,145 @@ export const categorySlugs: Record<ProductCategory, string> = {
 export const categoryData: Record<
   string,
   {
-    title: ProductCategory;
+    title: string;
     heading: string;
     description: string;
   }
 > = {
   'live-feeders': {
     title: 'Live Feeders',
-    heading: 'Live Feeders',
+    heading: 'Premium live feeders.',
     description:
-      'Live feeder products packed around clean supply, keeper convenience, and professional fulfillment standards.'
+      'Professionally maintained feeder inventory built for reptile keepers, breeders, and long-term feeding programs.'
   },
+
   'bioactive-cultures': {
     title: 'Bioactive Cultures',
-    heading: 'Bioactive Cultures',
+    heading: 'Bioactive cultures.',
     description:
-      'Springtails and future cleanup crew cultures for bioactive enclosures, colony expansion, and keeper systems.'
+      'Healthy springtail cultures and future cleanup crew support products for serious enclosure builds.'
   },
+
   supplies: {
     title: 'Supplies',
-    heading: 'Supplies',
+    heading: 'Keeper support supplies.',
     description:
-      'Support products for feeder care, culture maintenance, and bioactive enclosure setup.'
+      'Add-on products, maintenance support, private-label consumables, and practical habitat essentials.'
   },
+
   'starter-kits': {
     title: 'Starter Kits',
-    heading: 'Starter Kits',
+    heading: 'Ready-to-start systems.',
     description:
-      'Curated starter systems that bundle live products, supplies, and care guidance into cleaner entry points.'
+      'Turnkey options for keepers starting new feeder, bioactive, or habitat support systems.'
   }
 };
 
-export const productOptions: Record<
-  string,
+const catalog: Product[] = [
   {
-    name: string;
-    values: string[];
-  }[]
-> = {
-  'live-mealworms': [
-    {
-      name: 'Feeder Size',
-      values: [
-        'Small (0.25”) — hatchlings / tiny feeders',
-        'Medium (0.50”) — standard feeder size',
-        'Large (0.75”) — popular general-purpose size',
-        'XL (1.00”) — heavier feeder option',
-        'Giant (1.25”+) — premium large feeders'
-      ]
-    }
-  ]
-};
+    id: 'mealworms',
+    slug: 'live-mealworms',
+    title: 'Live Mealworms',
+    category: 'Live Feeders',
+    description:
+      'Healthy feeder mealworms maintained under controlled conditions for reptiles, amphibians, birds, and invertebrates.',
+    status: 'Available',
+    is_live_product: true,
+    featured: true,
+    variants: [
+      { id: 'mw-100-small', title: '100 Count • Small', price: 799 },
+      { id: 'mw-250-medium', title: '250 Count • Medium', price: 1499 },
+      { id: 'mw-500-large', title: '500 Count • Large', price: 2499 },
+      { id: 'mw-1000-giant', title: '1000 Count • Giant', price: 4499 }
+    ]
+  },
+
+  {
+    id: 'temperate-whites',
+    slug: 'temperate-white-springtails',
+    title: 'Temperate White Springtails',
+    category: 'Bioactive Cultures',
+    description:
+      'Established temperate white springtail cultures ideal for bioactive enclosures, cleanup crews, and colony expansion.',
+    status: 'Available',
+    is_live_product: true,
+    featured: true,
+    variants: [
+      { id: 'sw-starter', title: 'Starter Culture', price: 1499 },
+      { id: 'sw-established', title: 'Established Culture', price: 2499 }
+    ]
+  },
+
+  {
+    id: 'springtail-food',
+    slug: 'springtail-food',
+    title: 'OMEN Springtail Food',
+    category: 'Supplies',
+    description:
+      'Private-label springtail support food formulated for easy keeper use and clean culture maintenance.',
+    status: 'Available',
+    is_live_product: false,
+    featured: true,
+    variants: [
+      { id: 'sf-small', title: 'Small Pack', price: 799 },
+      { id: 'sf-large', title: 'Large Pack', price: 1499 }
+    ]
+  },
+
+  {
+    id: 'starter-kit',
+    slug: 'bioactive-starter-kit',
+    title: 'Bioactive Starter Kit',
+    category: 'Starter Kits',
+    description:
+      'A streamlined starter package built to help new keepers begin a basic bioactive support setup.',
+    status: 'Coming Soon',
+    is_live_product: false,
+    featured: true,
+    variants: [{ id: 'bk-1', title: 'Starter Kit', price: 5999 }]
+  }
+];
+
+export const productOptions: Record<string, ProductVariant[]> = Object.fromEntries(
+  catalog.map((product) => [product.slug, product.variants])
+);
 
 export const productIncludes: Record<string, string[]> = {
-  'springtail-starter-kit': [
-    '16 oz springtail culture',
-    'springtail food',
-    'charcoal',
-    'starter container',
-    'care guide'
+  'temperate-white-springtails': [
+    'Established culture media',
+    'Live springtail population',
+    'Care guidance'
   ],
-  'mealworm-starter-kit': [
-    '500 mealworms',
-    'starter substrate',
-    'care guide',
-    'moisture feeding guide'
+
+  'bioactive-starter-kit': [
+    'Culture starter components',
+    'Basic support consumables',
+    'Setup guidance'
   ]
 };
 
-export function formatPrice(cents: number) {
-  if (!cents) return 'Pricing coming soon';
-  return `$${(cents / 100).toFixed(2)}`;
-}
-
-export function getProductPriceRange(product: CatalogProduct) {
-  const pricedVariants = product.product_variants.filter(
-    (variant) => variant.price > 0
-  );
-
-  if (!pricedVariants.length) return 'Pricing coming soon';
-
-  const prices = pricedVariants.map((variant) => variant.price);
-  const min = Math.min(...prices);
-  const max = Math.max(...prices);
-
-  if (min === max) return formatPrice(min);
-
-  return `${formatPrice(min)} – ${formatPrice(max)}`;
-}
-
-export async function getProducts() {
-  const { data, error } = await supabase
-    .from('products')
-    .select(
-      `
-      *,
-      product_variants (*)
-    `
-    )
-    .eq('status', 'active')
-    .order('created_at', { ascending: true });
-
-  if (error) {
-    console.error(error);
-    return [];
-  }
-
-  return (data || []) as CatalogProduct[];
-}
-
 export async function getFeaturedProducts() {
-  const { data, error } = await supabase
-    .from('products')
-    .select(
-      `
-      *,
-      product_variants (*)
-    `
-    )
-    .eq('status', 'active')
-    .eq('featured', true)
-    .order('created_at', { ascending: true })
-    .limit(4);
-
-  if (error) {
-    console.error(error);
-    return [];
-  }
-
-  return (data || []) as CatalogProduct[];
+  return catalog.filter((product) => product.featured);
 }
 
-export async function getProductsByCategory(category: ProductCategory) {
-  const { data, error } = await supabase
-    .from('products')
-    .select(
-      `
-      *,
-      product_variants (*)
-    `
-    )
-    .eq('status', 'active')
-    .eq('category', category)
-    .order('created_at', { ascending: true });
-
-  if (error) {
-    console.error(error);
-    return [];
-  }
-
-  return (data || []) as CatalogProduct[];
+export async function getProductsByCategory(category: string) {
+  return catalog.filter((product) => product.category === category);
 }
 
 export async function getProductBySlug(slug: string) {
-  const { data, error } = await supabase
-    .from('products')
-    .select(
-      `
-      *,
-      product_variants (*)
-    `
-    )
-    .eq('status', 'active')
-    .eq('slug', slug)
-    .single();
+  return catalog.find((product) => product.slug === slug);
+}
 
-  if (error) {
-    console.error(error);
-    return null;
+export function getProductPriceRange(product: Product) {
+  if (!product.variants?.length) return 'Pricing coming soon';
+
+  const prices = product.variants.map((variant) => variant.price);
+  const min = Math.min(...prices);
+  const max = Math.max(...prices);
+
+  if (min === max) {
+    return `$${(min / 100).toFixed(2)}`;
   }
 
-  return data as CatalogProduct;
+  return `$${(min / 100).toFixed(2)}–$${(max / 100).toFixed(2)}`;
 }

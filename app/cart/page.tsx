@@ -55,46 +55,49 @@ export default function Cart() {
   }
 
   return (
-    <section className="section">
+    <section className="section cart-page">
       <div className="container">
-        <div className="eyebrow">Cart</div>
+        <div className="eyebrow">OMEN Checkout</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,7vw,6rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
+        <h1 className="page-title">
           Your cart.
         </h1>
 
+        <p className="page-intro">
+          Review your live feeders, cultures, supplies, and starter kits before
+          checkout.
+        </p>
+
         {cart.length === 0 ? (
-          <div className="card" style={{ marginTop: 42 }}>
-            <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Your cart is empty.
-            </h3>
+          <div className="empty-cart-panel">
+            <div>
+              <div className="eyebrow">Cart Empty</div>
 
-            <p className="muted">
-              Start with live feeders, bioactive cultures, supplies, or starter kits.
-            </p>
+              <h2>No products selected.</h2>
 
-            <Link className="btn" href="/shop" style={{ marginTop: 20 }}>
-              Shop OMEN
-            </Link>
+              <p>
+                Start with live feeders, bioactive cultures, supplies, or starter
+                kits.
+              </p>
+
+              <Link className="btn" href="/shop">
+                Shop OMEN
+              </Link>
+            </div>
           </div>
         ) : (
-          <div className="cart-layout">
-            <div className="card">
+          <div className="premium-cart-layout">
+            <div className="cart-items-panel">
               {cart.map((item) => (
-                <div className="cart-row" key={item.variantId}>
-                  <div>
-                    <strong>{item.productTitle}</strong>
+                <div className="premium-cart-row" key={item.variantId}>
+                  <div className="cart-product-thumb" />
 
-                    <p className="muted">
-                      {item.variantTitle} • {formatPrice(item.price)}
-                    </p>
+                  <div className="cart-product-main">
+                    <Link href={`/product/${item.productSlug}`}>
+                      <strong>{item.productTitle}</strong>
+                    </Link>
+
+                    <p>{item.variantTitle}</p>
 
                     <div className="cart-controls">
                       <label className="eyebrow" htmlFor={`qty-${item.variantId}`}>
@@ -118,7 +121,7 @@ export default function Cart() {
 
                       <button
                         type="button"
-                        className="btn secondary"
+                        className="cart-remove-button"
                         onClick={() => removeItem(item.variantId)}
                       >
                         Remove
@@ -126,36 +129,45 @@ export default function Cart() {
                     </div>
                   </div>
 
-                  <div>{formatPrice(item.price * item.quantity)}</div>
+                  <div className="cart-line-price">
+                    <span>{formatPrice(item.price * item.quantity)}</span>
+                    <small>{formatPrice(item.price)} each</small>
+                  </div>
                 </div>
               ))}
             </div>
 
-            <div className="card">
-              <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-                Order Summary
-              </h3>
+            <aside className="order-summary-panel">
+              <div className="eyebrow">Order Summary</div>
 
-              <div className="cart-row">
+              <h2>Ready to ship.</h2>
+
+              <div className="summary-line">
                 <span>Subtotal</span>
-                <span>{formatPrice(subtotal)}</span>
+                <strong>{formatPrice(subtotal)}</strong>
               </div>
 
-              <div className="cart-row">
+              <div className="summary-line">
                 <span>Shipping</span>
-                <span>Calculated at checkout</span>
+                <strong>Calculated at checkout</strong>
+              </div>
+
+              <div className="summary-line">
+                <span>Live order status</span>
+                <strong>{hasLiveProducts ? 'Policy required' : 'Not required'}</strong>
               </div>
 
               {hasLiveProducts && (
-                <label className="policy-check">
+                <label className="policy-check premium-policy-check">
                   <input
                     type="checkbox"
                     checked={policyAccepted}
                     onChange={(event) => setPolicyAccepted(event.target.checked)}
                   />
 
-                  <span className="muted">
-                    I understand live shipping policies and live arrival terms.
+                  <span>
+                    I understand live shipping policies, weather holds, and live
+                    arrival terms.
                   </span>
                 </label>
               )}
@@ -173,10 +185,14 @@ export default function Cart() {
                 Checkout
               </button>
 
-              <p className="muted" style={{ fontSize: '.9rem', marginTop: 16 }}>
+              <p className="summary-note">
                 Checkout wiring comes later. Cart storage is active.
               </p>
-            </div>
+
+              <Link href="/shipping" className="text-link summary-link">
+                View Shipping Policy →
+              </Link>
+            </aside>
           </div>
         )}
       </div>

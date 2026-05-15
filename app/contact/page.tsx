@@ -1,114 +1,58 @@
 export default function Page() {
   return (
-    <section className="section">
+    <section className="section contact-page">
       <div className="container">
         <div className="eyebrow">Contact OMEN</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,7vw,6rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
+        <h1 className="page-title">
           Get in touch.
         </h1>
 
-        <p
-          className="muted"
-          style={{
-            maxWidth: 700,
-            marginTop: 20
-          }}
-        >
-          Questions about products, future availability, wholesale relationships,
-          or OMEN EXOTICS in general.
+        <p className="page-intro">
+          Questions about products, availability, shipping, wholesale supply, or
+          future OMEN EXOTICS releases.
         </p>
 
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fit,minmax(340px,1fr))',
-            gap: 36,
-            marginTop: 44
-          }}
-        >
-          <div className="card">
-            <h2
-              style={{
-                fontFamily: 'Georgia, serif',
-                marginTop: 0
-              }}
-            >
-              Send a message
-            </h2>
+        <div className="contact-layout">
+          <div className="contact-form-panel">
+            <h2>Send a message</h2>
 
             <form className="form">
               <input className="input" placeholder="Full name" />
               <input className="input" placeholder="Email address" />
               <input className="input" placeholder="Subject" />
-              <textarea
-                className="textarea"
-                placeholder="Tell us what you need."
-              />
+              <textarea className="textarea" placeholder="Tell us what you need." />
               <button className="btn" type="button">
                 Send Message
               </button>
             </form>
           </div>
 
-          <div
-            className="grid"
-            style={{
-              gap: 24
-            }}
-          >
-            <div className="card">
-              <h3
-                style={{
-                  fontFamily: 'Georgia, serif',
-                  marginTop: 0
-                }}
-              >
-                Business
-              </h3>
-
-              <p className="muted">
-                OMEN EXOTICS is building a premium supply platform for serious
-                keepers, breeders, and exotic hobbyists.
+          <div className="contact-info-stack">
+            <div className="contact-info-card">
+              <span>01</span>
+              <h3>Product Support</h3>
+              <p>
+                Questions about live feeders, springtail cultures, starter kits,
+                supplies, or product care.
               </p>
             </div>
 
-            <div className="card">
-              <h3
-                style={{
-                  fontFamily: 'Georgia, serif',
-                  marginTop: 0
-                }}
-              >
-                Response Times
-              </h3>
-
-              <p className="muted">
-                Most inquiries should receive a response within normal business
-                turnaround windows.
+            <div className="contact-info-card">
+              <span>02</span>
+              <h3>Wholesale</h3>
+              <p>
+                For pet stores, breeders, educational programs, and bulk supply
+                relationships.
               </p>
             </div>
 
-            <div className="card">
-              <h3
-                style={{
-                  fontFamily: 'Georgia, serif',
-                  marginTop: 0
-                }}
-              >
-                Future Support
-              </h3>
-
-              <p className="muted">
-                Order support, care guidance, and wholesale communication will
-                be handled through dedicated systems as the platform expands.
+            <div className="contact-info-card">
+              <span>03</span>
+              <h3>Future Releases</h3>
+              <p>
+                Product drops, new culture lines, isopods, and future exotic
+                animal availability.
               </p>
             </div>
           </div>

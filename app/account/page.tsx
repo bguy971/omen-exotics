@@ -1,68 +1,42 @@
+import Link from 'next/link';
+
 export default function Account() {
   return (
-    <section className="section">
+    <section className="section account-page">
       <div className="container">
         <div className="eyebrow">Customer Account</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,7vw,6rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
-          Your OMEN account.
-        </h1>
+        <h1 className="page-title">Your OMEN account.</h1>
 
-        <div
-          className="grid"
-          style={{
-            gridTemplateColumns: 'repeat(auto-fit,minmax(260px,1fr))',
-            gap: 28,
-            marginTop: 42
-          }}
-        >
-          <div className="card">
-            <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Orders
-            </h3>
+        <p className="page-intro">
+          Manage orders, saved information, subscriptions, and future customer
+          tools as the OMEN platform expands.
+        </p>
 
-            <p className="muted">
-              Track order history, shipment status, and fulfillment records.
-            </p>
-          </div>
+        <div className="account-grid">
+          <Link className="account-card" href="/account">
+            <span>01</span>
+            <h2>Orders</h2>
+            <p>Track order history, shipment status, and fulfillment records.</p>
+          </Link>
 
-          <div className="card">
-            <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Addresses
-            </h3>
+          <Link className="account-card" href="/account">
+            <span>02</span>
+            <h2>Addresses</h2>
+            <p>Save preferred shipping destinations for faster checkout.</p>
+          </Link>
 
-            <p className="muted">
-              Save preferred shipping destinations for faster checkout.
-            </p>
-          </div>
+          <Link className="account-card" href="/account">
+            <span>03</span>
+            <h2>Subscriptions</h2>
+            <p>Manage future recurring feeder shipments and supply plans.</p>
+          </Link>
 
-          <div className="card">
-            <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Subscriptions
-            </h3>
-
-            <p className="muted">
-              Manage recurring feeder shipments and future subscription products.
-            </p>
-          </div>
-
-          <div className="card">
-            <h3 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Account Settings
-            </h3>
-
-            <p className="muted">
-              Profile details, communication preferences, and future customer
-              controls.
-            </p>
-          </div>
+          <Link className="account-card" href="/account">
+            <span>04</span>
+            <h2>Settings</h2>
+            <p>Profile details, preferences, and future account controls.</p>
+          </Link>
         </div>
       </div>
     </section>

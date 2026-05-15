@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import Link from 'next/link';
 
 export function Header() {
@@ -6,38 +5,31 @@ export function Header() {
     <header className="site-header">
       <div className="top-strip">
         <div className="container top-strip-inner">
-          <span>Live orders ship Mon–Wed</span>
-          <span>Premium Supply for Serious Keepers</span>
-          <span>OMEN EXOTICS</span>
+          <span>Premium Exotic Supply</span>
+          <span>Live Feeders • Cultures • Supplies</span>
+          <span>Ships Mon–Wed</span>
         </div>
       </div>
 
-      <div className="nav">
+      <nav className="nav">
         <div className="container nav-inner">
-          <Link href="/" className="logo-link">
-            <Image
-              src="/logo.png"
-              alt="OMEN EXOTICS"
-              width={260}
-              height={90}
-              priority
-              className="header-logo"
-            />
+          <Link className="logo-link" href="/">
+            <img className="header-logo" src="/logo.png" alt="OMEN EXOTICS" />
           </Link>
 
-          <nav className="nav-links">
+          <div className="nav-links">
             <Link href="/shop">Shop</Link>
-            <Link href="/shipping">Shipping</Link>
+            <Link href="/shop/live-feeders">Feeders</Link>
+            <Link href="/shop/bioactive-cultures">Cultures</Link>
+            <Link href="/shop/supplies">Supplies</Link>
             <Link href="/wholesale">Wholesale</Link>
-            <Link href="/about">About</Link>
-            <Link href="/account">Account</Link>
-          </nav>
+          </div>
 
-          <Link href="/cart" className="cart-link">
+          <Link className="cart-link" href="/cart">
             Cart
           </Link>
         </div>
-      </div>
+      </nav>
     </header>
   );
 }

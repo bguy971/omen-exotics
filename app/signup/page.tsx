@@ -1,43 +1,31 @@
+import Link from 'next/link';
+
 export default function Signup() {
   return (
-    <section className="section">
-      <div
-        className="container"
-        style={{
-          maxWidth: 560
-        }}
-      >
+    <section className="section auth-page">
+      <div className="auth-shell">
         <div className="eyebrow">Create Account</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,6vw,5rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
-          Join OMEN.
-        </h1>
+        <h1>Join OMEN.</h1>
 
-        <div
-          className="card"
-          style={{
-            marginTop: 36
-          }}
-        >
+        <p>
+          Create an account for future order tools, restock alerts, saved
+          shipping details, and customer access.
+        </p>
+
+        <div className="auth-card">
           <form className="form">
             <input className="input" placeholder="Email address" />
-            <input
-              className="input"
-              placeholder="Password"
-              type="password"
-            />
+            <input className="input" placeholder="Password" type="password" />
 
             <button className="btn" type="button">
               Create Account
             </button>
           </form>
+
+          <Link className="text-link auth-link" href="/login">
+            Already have an account? Sign In →
+          </Link>
         </div>
       </div>
     </section>

@@ -1,43 +1,31 @@
+import Link from 'next/link';
+
 export default function Login() {
   return (
-    <section className="section">
-      <div
-        className="container"
-        style={{
-          maxWidth: 560
-        }}
-      >
+    <section className="section auth-page">
+      <div className="auth-shell">
         <div className="eyebrow">Account Access</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,6vw,5rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
-          Sign in.
-        </h1>
+        <h1>Sign in.</h1>
 
-        <div
-          className="card"
-          style={{
-            marginTop: 36
-          }}
-        >
+        <p>
+          Access your OMEN account, future order history, saved addresses, and
+          account tools.
+        </p>
+
+        <div className="auth-card">
           <form className="form">
             <input className="input" placeholder="Email address" />
-            <input
-              className="input"
-              placeholder="Password"
-              type="password"
-            />
+            <input className="input" placeholder="Password" type="password" />
 
             <button className="btn" type="button">
               Sign In
             </button>
           </form>
+
+          <Link className="text-link auth-link" href="/signup">
+            Create Account →
+          </Link>
         </div>
       </div>
     </section>

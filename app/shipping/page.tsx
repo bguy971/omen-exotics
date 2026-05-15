@@ -1,79 +1,54 @@
 export default function Page() {
   return (
-    <section className="section">
+    <section className="section policy-page">
       <div className="container">
         <div className="eyebrow">Shipping Policy</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,7vw,6rem)',
-            lineHeight: '.92',
-            marginTop: 14
-          }}
-        >
+        <h1 className="page-title">
           Shipping built
           <br />
           around live success.
         </h1>
 
-        <div
-          className="grid"
-          style={{
-            marginTop: 42,
-            gap: 28
-          }}
-        >
-          <div className="card">
-            <h2 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Shipping Schedule
-            </h2>
+        <p className="page-intro">
+          Live orders require careful timing, safe weather windows, and clean
+          packing standards.
+        </p>
 
-            <p className="muted">
+        <div className="policy-grid">
+          <div className="policy-card">
+            <span>01</span>
+            <h2>Shipping Schedule</h2>
+            <p>
               Live orders ship Monday through Wednesday to reduce weekend transit
               delays and maximize arrival success.
             </p>
+          </div>
 
-            <p className="muted">
-              Orders placed later in the week may be held until the next safe
-              shipping window.
+          <div className="policy-card">
+            <span>02</span>
+            <h2>Weather Holds</h2>
+            <p>
+              OMEN EXOTICS may delay live shipments during unsafe heat or cold.
+              Protecting live inventory comes before forcing avoidable shipments.
             </p>
           </div>
 
-          <div className="card">
-            <h2 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Weather Holds
-            </h2>
-
-            <p className="muted">
-              OMEN EXOTICS may delay live shipments during unsafe heat or cold
-              conditions.
-            </p>
-
-            <p className="muted">
-              Protecting live inventory matters more than forcing an avoidable
-              shipment.
+          <div className="policy-card">
+            <span>03</span>
+            <h2>Packaging Standards</h2>
+            <p>
+              Live products are packed with airflow, containment, insulation when
+              needed, and transit stability in mind.
             </p>
           </div>
 
-          <div className="card">
-            <h2 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Packaging Standards
-            </h2>
-
-            <p className="muted">
-              Live products are packed according to species requirements with
-              airflow, containment, and transit stability in mind.
-            </p>
-          </div>
-
-          <div className="card">
-            <h2 style={{ fontFamily: 'Georgia, serif', marginTop: 0 }}>
-              Tracking
-            </h2>
-
-            <p className="muted">
-              Tracking information will be provided when your order ships.
+          <div className="policy-card">
+            <span>04</span>
+            <h2>Tracking</h2>
+            <p>
+              Tracking information will be provided when your order ships. Buyers
+              should monitor delivery and avoid leaving live packages outside.
             </p>
           </div>
         </div>

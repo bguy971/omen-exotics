@@ -24,114 +24,75 @@ export default async function ProductPage({
   const includes = productIncludes[product.slug] || [];
 
   return (
-    <section className="section">
-      <div
-        className="container grid"
-        style={{
-          gridTemplateColumns: 'repeat(auto-fit,minmax(360px,1fr))',
-          gap: 56,
-          alignItems: 'start'
-        }}
-      >
-        <div>
-          <div
-            className="card"
-            style={{
-              minHeight: 560,
-              display: 'grid',
-              placeItems: 'center',
-              background:
-                'radial-gradient(circle at top right, rgba(140,107,47,.14), transparent 14rem), #111111'
-            }}
-          >
-            <span className="muted">Premium Product Photography</span>
+    <section className="section product-page">
+      <div className="container product-detail-grid">
+        <div className="product-gallery">
+          <div className="product-main-image">
+            <span>{product.category}</span>
+          </div>
+
+          <div className="product-thumb-row">
+            <div />
+            <div />
+            <div />
           </div>
         </div>
 
-        <div>
+        <div className="product-info-panel">
           <div className="eyebrow">
             {product.category} • {product.status}
           </div>
 
-          <h1
-            style={{
-              fontFamily: 'Georgia, serif',
-              fontSize: 'clamp(3rem,6vw,5.4rem)',
-              lineHeight: '.92',
-              marginTop: 14,
-              marginBottom: 14
-            }}
-          >
-            {product.title}
-          </h1>
+          <h1 className="product-title">{product.title}</h1>
 
-          <p className="price" style={{ fontSize: '2rem', marginBottom: 20 }}>
-            {getProductPriceRange(product)}
-          </p>
+          <p className="product-price">{getProductPriceRange(product)}</p>
 
-          <p className="muted" style={{ fontSize: '1.05rem', maxWidth: 640 }}>
-            {product.description}
-          </p>
+          <p className="product-description">{product.description}</p>
+
+          <div className="product-trust-row">
+            <span>Healthy Stock</span>
+            <span>Secure Packing</span>
+            <span>Ships Mon–Wed</span>
+          </div>
 
           <ProductPurchaseBox product={product} options={options} includes={includes} />
 
           {product.is_live_product && (
-            <div className="card" style={{ marginTop: 24 }}>
-              <strong style={{ display: 'block', marginBottom: 12 }}>
-                Live Product Notice
-              </strong>
+            <div className="live-notice-card">
+              <strong>Live Product Notice</strong>
 
-              <p className="muted">
+              <p>
                 Live products ship Monday through Wednesday to reduce transit
-                risk and avoid weekend delays.
+                risk and avoid weekend delays. Orders may be held during unsafe
+                weather conditions.
               </p>
 
-              <p className="muted">
-                Orders may be delayed during unsafe weather conditions to protect
-                live arrival success.
-              </p>
-
-              <label
-                style={{
-                  display: 'flex',
-                  gap: 12,
-                  marginTop: 20,
-                  alignItems: 'flex-start'
-                }}
-              >
+              <label>
                 <input type="checkbox" />
-                <span className="muted">
+                <span>
                   I understand OMEN EXOTICS live shipping and arrival policies.
                 </span>
               </label>
             </div>
           )}
 
-          <div className="card" style={{ marginTop: 40 }}>
-            <h2
-              style={{
-                fontFamily: 'Georgia, serif',
-                fontSize: '2rem',
-                marginTop: 0
-              }}
-            >
-              The OMEN Standard
-            </h2>
+          <div className="product-standard-card">
+            <h2>The OMEN Standard</h2>
 
-            <p className="muted">
+            <p>
               Every live product is handled with keeper-first standards,
-              structured production controls, and professional fulfillment
+              controlled colony maintenance, and professional fulfillment
               practices.
             </p>
 
-            <div style={{ display: 'grid', gap: 12, marginTop: 22 }}>
+            <div className="standard-list">
               <div>✓ Quality checked before fulfillment</div>
               <div>✓ Controlled colony maintenance</div>
               <div>✓ Shipping risk protocols</div>
               <div>✓ Premium direct-to-customer presentation</div>
             </div>
 
-            <Link className="btn secondary" href="/shipping" style={{ marginTop: 24 }}>
+            <Link className="btn secondary" href="/shipping">
               View Shipping Policy
             </Link>
           </div>
