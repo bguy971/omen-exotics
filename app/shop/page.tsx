@@ -12,61 +12,48 @@ export default async function Shop() {
   const categoryCounts = await Promise.all(
     categories.map(async (category) => {
       const products = await getProductsByCategory(category);
-      return {
-        category,
-        count: products.length
-      };
+      return { category, count: products.length };
     })
   );
 
   return (
-    <section className="section">
+    <section className="section shop-landing">
       <div className="container">
         <div className="eyebrow">Shop OMEN</div>
 
-        <h1
-          style={{
-            fontFamily: 'Georgia, serif',
-            fontSize: 'clamp(3rem,7vw,6rem)',
-            lineHeight: '.92',
-            marginTop: 12
-          }}
-        >
-          Choose your
+        <h1 className="page-title">
+          Shop by
           <br />
-          supply category.
+          category.
         </h1>
 
-        <p
-          className="muted"
-          style={{
-            maxWidth: 760,
-            marginTop: 18,
-            marginBottom: 42
-          }}
-        >
-          OMEN is organized by category so the shop stays clean as the catalog
-          grows.
+        <p className="page-intro">
+          Fast access to live feeders, bioactive cultures, supplies, and starter
+          kits. Built to stay simple now and scale cleanly as OMEN expands.
         </p>
 
-        <div className="category-list">
+        <div className="shop-category-grid">
           {categoryCounts.map(({ category, count }) => {
             const slug = categorySlugs[category];
             const item = categoryData[slug];
 
             return (
-              <Link className="category-tile" href={`/shop/${slug}`} key={category}>
+              <Link
+                className={`shop-category-card shop-card-${slug}`}
+                href={`/shop/${slug}`}
+                key={category}
+              >
                 <div>
                   <p className="eyebrow">
                     {count} Product{count === 1 ? '' : 's'}
                   </p>
 
-                  <h3>{item.title}</h3>
+                  <h2>{item.title}</h2>
 
-                  <p className="muted">{item.description}</p>
+                  <p>{item.description}</p>
                 </div>
 
-                <span className="category-arrow">→</span>
+                <span>Shop Now →</span>
               </Link>
             );
           })}
