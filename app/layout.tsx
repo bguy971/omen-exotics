@@ -27,7 +27,7 @@ export const metadata: Metadata = {
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  const siteComingSoon = false;
+  const siteComingSoon = true;
 
   return (
     <html lang="en">
